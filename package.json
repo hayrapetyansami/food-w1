@@ -1,0 +1,27 @@
+{
+  "name": "food-project",
+  "version": "1.0.9",
+  "description": "food project which made by group 1",
+  "main": "index.js",
+  "scripts": {
+    "serve" : "json-server --watch db.json --port 8888 "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayrapetyansami/food-w1.git"
+  },
+  "keywords": [
+    "food",
+    "blog",
+    "front-end"
+  ],
+  "author": "group1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hayrapetyansami/food-w1/issues"
+  },
+  "homepage": "https://github.com/hayrapetyansami/food-w1#readme",
+  "devDependencies": {
+    "json-server": "^0.17.3"
+  }
+}
