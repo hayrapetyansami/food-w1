@@ -279,45 +279,44 @@ window.addEventListener("DOMContentLoaded", function () {
 
 			const { loading, success, failure } = messages;
 
-			let statusMessage = document.createElement("div");
-			statusMessage.innerHTML = loading();
-			form.append(statusMessage);
-
-			const request = new XMLHttpRequest();
-			request.open("POST", "server.php");
-
-			// request.setRequestHeader("Content-type", "multipart/form-data");
-			request.setRequestHeader("Content-type", "application/json; charset=utf-8");
+			const loader = document.createElement("div");
+			loader.innerHTML = loading();
+			form.append(loader);
 
 			if (!navigator.onLine) {
 				showThanksModal(failure + ":" + "Please check your internet connection !");
-				statusMessage.remove();
+				loader.remove();
 				form.reset();
 			}
 
 			const formData = new FormData(form);
-
 			const obj = {};
-			formData.forEach((val, key) => obj[key] = val);
+			formData.forEach((value, key) => obj[key] = value);
 
-			request.send(JSON.stringify(obj));
-
-			request.addEventListener("load", () => {
-				if (request.status === 200) {
-					console.log(request.response);
-					showThanksModal(success);
-					statusMessage.remove();
-					form.reset();
-				} else {
-					showThanksModal(failure + " " + request.statusText + ": " + request.status);
-					statusMessage.remove();
-					form.reset();
-				}
+			fetch("server.php", {
+				method: "POST",
+				headers: {
+					"Content-type": "application/json; charset=utf-8"
+				},
+				body: JSON.stringify(obj)
+			})
+			.then(data => data.text())
+			// .then(data => data.json())
+			.then(data => {
+				console.log(data);
+				messagesModal(success);
+			})
+			.catch(err => {
+				messagesModal(failure + ": " + err);
+			})
+			.finally(() => {
+				loader.remove();
+				form.reset();
 			});
 		});
 	}
 
-	function showThanksModal(message) {
+	function messagesModal(message) {
 		const prevModalDialog = document.querySelector(".modal__dialog");
 
 		prevModalDialog.classList.add("hide");
