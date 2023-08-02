@@ -44,37 +44,9 @@
       "id": 4
     },
     {
-      "{\"name\":\"Danny\",\"phone\":\" 1456498454\"}": "",
+      "name": "Jessica",
+      "phone": "+159555265695",
       "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "{\"name\":\"Andrey\",\"phone\":\" 71464152416\"}": "",
-      "id": 8
-    },
-    {
-      "{\"name\":\"asfsadfgasdgasdg\",\"phone\":\"654545\"}": "",
-      "id": 9
-    },
-    {
-      "name": "Andrey Belinski",
-      "phone": "+45345646",
-      "id": 10
-    },
-    {
-      "name": "asdfdasfasdfdasf",
-      "phone": "654456",
-      "id": 11
-    },
-    {
-      "name": "Samvel",
-      "phone": "+3745654653464",
-      "id": 12
     }
   ]
 }
