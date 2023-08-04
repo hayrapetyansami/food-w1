@@ -324,29 +324,48 @@ window.addEventListener("DOMContentLoaded", function () {
 			form.append(loader);
 
 			if (!navigator.onLine) {
-				showThanksModal(failure + ":" + "Please check your internet connection !");
+				messagesModal(failure + ":" + "Please check your internet connection !");
 				loader.remove();
 				form.reset();
 			}
+			
+			const empty = /^$/g;
+			const phone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+			let status = false;
 
-			const formData = new FormData(form);
-			// const json = JSON.parse(JSON.stringify(Object.fromEntries(formData.entries())));
-			const data = Object.fromEntries(formData)
-
-			axios.post("http://localhost:8888/requests", data)
-
-				// postData("http://localhost:8888/requests", json)
-				.then(data => {
-					console.log(data);
-					messagesModal(success);
-				})
-				.catch(err => {
-					messagesModal(failure + ": " + err);
-				})
-				.finally(() => {
+			for (let i = 0; i < form.querySelectorAll("input").length; i++) {
+				if (empty.test(form[i].value) || !phone.test(form[1].value)) {
+					status = false;
+					messagesModal("Please fill all fields, and on Phone number field please fill only numbers")
 					loader.remove();
 					form.reset();
-				});
+					break;
+				} else {
+					status = true;
+				}
+			}
+
+			if (status) {
+				const formData = new FormData(form);
+				// const json = JSON.parse(JSON.stringify(Object.fromEntries(formData.entries())));
+				const data = Object.fromEntries(formData)
+
+				axios.post("http://localhost:8888/requests", data)
+					// postData("http://localhost:8888/requests", json)
+					.then(data => {
+						console.log(data);
+						messagesModal(success);
+					})
+					.catch(err => {
+						messagesModal(failure + ": " + err);
+					})
+					.finally(() => {
+						loader.remove();
+						form.reset();
+					});
+			} else {
+				console.log("status is false");
+			}
 		});
 	}
 
@@ -377,7 +396,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 	// Slider
 	let offset = 0;
-	let slideIndex = 1 
+	let slideIndex = 1;
 
 	const slides = document.querySelectorAll(".offer__slide");
 	const slider = document.querySelector(".offer__slider");
@@ -448,7 +467,7 @@ window.addEventListener("DOMContentLoaded", function () {
 	}
 
 	nextBtn.addEventListener("click", () => {
-		sliderLogic(parseFloat(width.slice(0, width.length - 2)) * (slides.length - 1), true, false);
+		sliderLogic(width.replace(/\D/g, "") * (slides.length - 1), true, false);
 		checkForZero();
 		dotsLogic();
 	});
@@ -463,7 +482,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		dot.addEventListener("click", (e) => {
 			const slideTo = e.target.getAttribute("data-slide-to");
 			slideIndex = slideTo;
-			offset = parseFloat(width.slice(0, width.length - 2)) * (slideTo - 1);
+			offset = width.replace(/\D/g, "") * (slideTo - 1);
 
 			slidesField.style.transform = `translateX(-${offset}px)`;
 
@@ -491,12 +510,12 @@ window.addEventListener("DOMContentLoaded", function () {
 		// nextBtn
 		if (next === true && prev === false) {
 			slideIndex === slides.length || slideIndex >= slides.length ? slideIndex = 1 : slideIndex++;
-			offset === statment ? offset = 0 : offset += parseFloat(width.slice(0, width.length - 2));
+			offset === statment ? offset = 0 : offset += +width.replace(/\D/g, "");
 		}
 		// prevBtn
 		if (next === false && prev === true) {
 			slideIndex === 1 || slideIndex <= 1 ? slideIndex = slides.length : slideIndex--;
-			offset === statment ? offset = parseFloat(width.slice(0, width.length - 2)) * (slides.length - 1) : offset -= parseFloat(width.slice(0, width.length - 2));
+			offset === statment ? offset = width.replace(/\D/g, "") * (slides.length - 1) : offset -= +width.replace(/\D/g, "");
 		}
 
 		slidesField.style.transform = `translateX(-${offset}px)`;
