@@ -55,4 +55,5 @@ function timerModule(timerParam) {
 	setClock(".timer", timerParam);
 }
 
-module.exports = timerModule;
+// module.exports = timerModule;
+export default timerModule;

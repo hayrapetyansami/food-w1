@@ -1,4 +1,4 @@
-function calculatorModule () {
+function calculatorModule() {
 	const result = document.querySelector(".calculating__result span");
 	let gender, height, weight, age, ratio;
 
@@ -118,4 +118,5 @@ function calculatorModule () {
 	getDynamicInformation("#age");
 }
 
-module.exports = calculatorModule;
+// module.exports = calculatorModule;
+export default calculatorModule;

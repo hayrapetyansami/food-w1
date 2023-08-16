@@ -1,4 +1,4 @@
-function menuCardsModule () {
+function menuCardsModule() {
 	// used Class for menu cards start
 	// class MenuCard {
 	// 	constructor(img, alt, title, descr, price, parentSelector) {
@@ -78,4 +78,5 @@ function menuCardsModule () {
 		.then(data => createMenuCard(data.data))
 }
 
-module.exports = menuCardsModule;
+// module.exports = menuCardsModule;
+export default menuCardsModule;

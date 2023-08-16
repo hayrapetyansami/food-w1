@@ -1,4 +1,4 @@
-function sliderModule () {
+function sliderModule() {
 	let offset = 0;
 	let slideIndex = 1;
 
@@ -126,4 +126,5 @@ function sliderModule () {
 	}
 }
 
-module.exports = sliderModule;
+// module.exports = sliderModule;
+export default sliderModule;

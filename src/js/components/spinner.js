@@ -55,4 +55,5 @@ function spinnerModule() {
 	`;
 }
 
-module.exports = spinnerModule;
+// module.exports = spinnerModule;
+export default spinnerModule;
