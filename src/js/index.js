@@ -15,7 +15,6 @@ window.addEventListener("DOMContentLoaded", function () {
 	// const sliderModule = require("./components/slider");
 	// const calculatorModule = require("./components/calculator");
 
-
 	tabsModule();
 	timerModule("2023-12-31 23:59:59");
 	modalModule();
